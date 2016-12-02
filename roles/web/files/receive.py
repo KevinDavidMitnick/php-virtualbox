@@ -11,13 +11,20 @@ from threading import Thread, Event
 import datetime
 
 #定义进程运行文件,以及日志文件
-runfile = "/var/run/sysprobe/sysprobe.pid"
-logfile = "/var/log/inkscope/sysprobe.log"
+runfile = "/var/run/receive.pid"
+logfile = "/var/log/receive.log"
 
-connection = pika.BlockingConnection(pika.ConnectionParameters('127.0.0.1'))
-channel = connection.channel()
-#定义routings key,VmCreate,VmStart,VmStop,VmReboot,VmDelete
+connection = None
+channel = None
 routings=["VmCreate","VmStart","VmStop","VmReboot","VmDelete"]
+try:
+    connection = pika.BlockingConnection(pika.ConnectionParameters('127.0.0.1'))
+    channel = connection.channel()
+    #定义routings key,VmCreate,VmStart,VmStop,VmReboot,VmDelete
+except:
+    connection = None
+    channel = None
+    
 
 #定义消息回调函数
 def VmCreate(vm):
@@ -62,22 +69,10 @@ def message_handle(ch, method, properties, body):
         eval(func)(vmins['vm'])
     ch.basic_ack(delivery_tag = method.delivery_tag)
 
-#定义进程文件
-def writePid():
-    pid = str(os.getpid())
-    f = file('/var/run/vboxagent.pid','w')
-    fcntl.flock(f,fcntl.LOCK_EX)
-    f.write(pid)
-    fcntl.flock(f,fcntl.LOCK_UN)
-    f.close()
-
-
 def start():
     print 'start recevie'
-    #写入进程号
-    writePid()
     global connection,channel,routings
-    if connection.is_closed:
+    if  connection is None or  connection.is_closed:
         connection = pika.BlockingConnection(pika.ConnectionParameters('127.0.0.1'))
         channel = connection.channel()
  
@@ -96,8 +91,6 @@ def start():
 
 def stop():
     print 'stop receive'
-    #删除进程文件
-    os.remove("/var/run/vboxagent.pid") 
     global connection,channel
     #删除交换机
     channel.exchange_delete("VmInstance")
