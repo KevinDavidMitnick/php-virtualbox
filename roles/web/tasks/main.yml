@@ -1,0 +1,44 @@
+---
+# These tasks install http and the php modules.
+
+- name: Install httpd and php
+  yum: name={{ item }} state=present
+  with_items:
+   - httpd
+   - php
+   - php-devel
+   - php-gd
+   - php-common
+   - php-soap
+   - php-mysql
+   - php-mbstring
+   - php-mysqli
+   - php-pecl-amqp
+   - rabbitmq-server
+   - epel-release
+   - python2-pika
+   - python-simplejson
+   - python-psutil
+
+- name: http service state
+  service: name=httpd state=started enabled=yes
+
+- name: upload taconsole.tar.gz
+  unarchive: src={{item}}.tar.gz dest=/var/www/html copy=yes owner=apache group=apache mode=0755 creates=/var/www/html/{{item}}
+  with_items:
+   - taconsole
+
+- name: upload function.php
+  template: src=function.php dest=/var/www/html/taconsole/Application/Common/Common/function.php
+
+- name:  install simplejson and pika and rabbitmq-plugins enable management
+  shell: rabbitmq-plugins enable rabbitmq_management
+  notify: reboot servers
+
+- name: upload vboxagent 
+  copy: src={{item}} dest=/etc/init.d/{{item}} mode=0755
+  with_items:
+   - vboxagent
+   - receive.py
+   - daemon.py
+  notify: autostart vboxagent

@@ -1,0 +1,131 @@
+
+<html>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+<title>{:C('WEB_SITE_TITLE')}</title>
+<link href="__STATIC__/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="__STATIC__/bootstrap/css/user.css" rel="stylesheet">
+<script>
+    var home_url = "{:U('index/index')}";
+</script>
+
+<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+<style type="text/css">
+
+	.dropdown {
+		padding-top: 15px;
+		text-align: right;
+	}
+	.dropdown a {
+		display: inline !important;
+		color: #999;
+	}
+
+
+.navbar .nav > li > a {
+    padding: 10px 0px 10px 10px;
+
+}
+.navbar .brand {
+	padding-right: 0;
+}
+a {text-decoration: none;}
+.dropdown a:hover {
+	text-decoration: none;
+	color: #4f9de0;
+}
+</style>
+<body>
+<header>
+    <!-- 导航条================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top" id="TaconsolePane">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="{:U('index/index')}">Trunkey</a>
+                <!--<a class="brand" href="{:U('index/index')}"><img src="turnkeylogo.png" alt="logo" /></a>-->
+                <div class=".dropdown.dropdown collapse pull-right">
+                    <if condition="is_login()">
+                        <ul class="nav" style="margin-right:0">
+                            <li class="dropdown">
+                                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left:0;padding-right:0">{:get_username()}：</a>、-->
+                                <span style="color: #999999;">{:get_username()}</span>
+                                <a onclick="add()"  id="vm_add">新建模拟器</a>
+                                <a href="{:U('User/profile')}">修改密码</a>
+                                <span id="lc_admin" style="display:none;">
+                                	<a class="dropdown_a" href="{:U('Home/Index/manage')}" >用户管理</a>
+                                </span>
+                                <a href="{:U('User/logout')}">退出</a>
+                            </li>
+                        </ul>
+                    </if>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="xnj_user">
+    <ul class="xnj_user_con">
+        <li>
+            <ul>
+                <li class="xuj_con_li_1">模拟器名称</li>
+                <li class="xuj_con_li_2">状态</li>
+                <!--<li class="xuj_con_li_3"><a href="66&">操作</a></li>-->
+                <li class="xuj_con_li_3">操作</li>
+            </ul>
+        </li>
+        <volist name="list" id="vo" >
+            <li class="xnj_con_tab" index="{:$key}" value="{:$key}">
+                <ul>
+                    <input type="hidden" value="{$vo.vmname}" id="vmname">
+                    <li class="xuj_con_li_1">{$vo.vmname}</li>
+                    <eq name="vo.vmid" value="running">
+                        <li class="xuj_con_li_2 xnj_user_tb{:$key} vm_state" uuid="{$vo.vmname}" state="{$vo.vmid}" index="{:$key}">运行中</li>
+                    </eq>
+                    <eq name="vo.vmid" value="shutdown">
+                        <li class="xuj_con_li_2 xnj_user_tb{:$key} vm_state" uuid="{$vo.vmname}" state="{$vo.vmid}" index="{:$key}">已关闭</li>
+                    </eq>
+                    <li class="xuj_con_li_3 xnj_user_zt"  index="{:$key}" value="{$vo.vmname}">
+                        <a class="start{:$key} start" href="javascript:start('{$vo.vmname}')">开机</a>
+                        <a class="cose{:$key} cose"   href="javascript:cose('{$vo.vmname}')">关机</a>
+                        <a class="shanqu{:$key} shanqu" href="javascript:destroy('{$vo.vmname}')">删除</a>
+                        <a class="chongqi{:$key} chongqi" href="javascript:reboot('{$vo.vmname}')">重启</a>
+                        <a href="{:U('index/index')}&ip={$vo.ip}&port={$vo.port}&" class="lianjie{:$key} lianjie"  ip="{$vo.ip}" port="{$vo.port}">连接</a>
+                    </li>
+                </ul>
+            </li>
+        </volist>
+    </ul>
+</div>
+
+</body>
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="__STATIC__/bootstrap/js/html5shiv.js"></script>
+<![endif]-->
+<block name="style"></block>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="__STATIC__/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="__STATIC__/bootstrap/js/bootstrap.min.js"></script>
+<!--<![endif]-->
+<script type="text/javascript" src="__STATIC__/json2.js"></script>
+<script type="text/javascript" src="__STATIC__/user.js"></script>
+<script>
+    //设置显示或者隐藏后台管理
+    var is_admin = "{$is_admin}";
+    if(is_admin == 1){
+       $("#lc_admin").show();
+    }
+    //设置虚拟机器状态.
+    set_vmstate();
+    
+     $('.dropdown a').hover(function (){
+    	$(this).css('color','#4f9ed0');
+    },function () {
+    	$(this).css('color','#999');
+    })
+</script>
+</html>

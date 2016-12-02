@@ -1,0 +1,12 @@
+---
+# Handler to handle common notifications. Handlers are called by other plays.
+# See http://docs.ansible.com/playbooks_intro.html for more information about handlers.
+
+- name: reboot servers
+  service: name={{item}} state=restarted enabled=yes
+  with_items:
+   - httpd
+   - rabbitmq-server
+
+- name: autostart vboxagent
+  service: name=vboxagent state=restarted enabled=yes

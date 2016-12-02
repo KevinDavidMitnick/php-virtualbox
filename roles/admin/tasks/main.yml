@@ -1,0 +1,54 @@
+---
+# This playbook contains common plays that will be run on all nodes.
+
+- name: upload yum repo.
+  copy: src={{item}} dest=/etc/yum.repos.d/{{item}} 
+  with_items:
+   - virtualbox.repo
+
+- name: yum install virtualbox dependency lib
+  script:  ./roles/admin/scripts/install_lib.sh
+
+- name: uninstall virtualbox ext
+  shell: vboxmanage extpack uninstall 'Oracle VM VirtualBox Extension Pack'
+
+- name: create user vbox
+  user: name=vbox group=vboxusers
+
+- name: modify vbox passwd as vbox
+  shell: echo vbox | passwd vbox --stdin
+
+- name: ceph rbd map 
+  script:  ./roles/admin/scripts/rbd_map.sh
+
+- name: modify /home/vbox owner
+  file: path='/home/vbox' state=directory mode=0755 owner=vbox group=vboxusers 
+
+- name: upload Oracle extpack 
+  copy: src={{item}} dest=/tmp/{{item}} owner=vbox group=vboxusers
+  with_items:
+   - Oracle_VM_VirtualBox_Extension_Pack-5.0.28-111378.vbox-extpack
+   - vbox-androidx86.ova
+
+- name: install virtualbox ext
+  shell: vboxmanage extpack install /tmp/Oracle_VM_VirtualBox_Extension_Pack-5.0.28-111378.vbox-extpack
+
+- name: create dir.
+  file: path='/home/vbox/VirtualBox'  state=directory mode=0755 owner=vbox group=vboxusers
+
+- name: set virtual home folder
+  shell: vboxmanage setproperty machinefolder /home/vbox/VirtualBox
+
+- name: import vboxmanage ova file
+  shell: vboxmanage  import /tmp/vbox-androidx86.ova 
+
+- name: create vbox trunkey-x86 snapshot
+  shell: vboxmanage snapshot trunkey-x86 take 0
+
+- name: restart virtualbox service
+  service: name={{item}} state=restarted enabled=yes
+  with_items:
+   - vboxautostart-service
+   - vboxballoonctrl-service
+   - vboxdrv
+   - vboxweb-service

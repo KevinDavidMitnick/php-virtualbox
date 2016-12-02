@@ -1,0 +1,28 @@
+---
+# This playbook deploys the whole application stack in this site.
+
+- name: apply common configuration 
+  hosts: all
+  remote_user: root
+  roles:
+    - common
+
+- name: deploy MySQL and configure the databases
+  hosts: dbservers
+  remote_user: root
+  roles:
+    - db
+
+- name: configure and deploy the webservers and application code
+  hosts: webservers
+  remote_user: root
+  roles:
+    - web
+
+
+- name: install virtualbox 
+  hosts: admin
+  remote_user: root
+  roles:
+    - admin
+

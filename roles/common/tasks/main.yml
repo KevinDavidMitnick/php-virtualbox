@@ -1,0 +1,24 @@
+---
+# This playbook contains common plays that will be run on all nodes.
+
+- name: get selinux status
+  command: /sbin/getenforce 
+  register: result
+
+- name: stop selinux
+  command: /sbin/setenforce  0
+  when: result.stdout != "Disabled" 
+
+- name: disable selinux
+  selinux: state=disabled
+
+- name: stop firewalld and iptables
+  service: name={{item}} state=stopped enabled=no
+  with_items:
+   - firewalld
+
+- name:  set centos repo
+  template: src={{item}}  dest=/etc/yum.repos.d/{{item}}
+  with_items:
+   - Centos-7.repo
+   - epel-7.repo

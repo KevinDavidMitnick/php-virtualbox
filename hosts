@@ -1,0 +1,9 @@
+[admin]
+NodeB
+
+[webservers]
+NodeB
+
+[dbservers]
+NodeB
+
