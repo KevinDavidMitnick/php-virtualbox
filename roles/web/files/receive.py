@@ -57,6 +57,8 @@ def VmReboot(vm):
 	
 def VmDelete(vm):
     vmname = vm['vmname']
+    cmd = "vboxmanage  controlvm %s poweroff" % vmname
+    os.system(cmd)
     cmd = "vboxmanage unregistervm %s --delete" % vmname
     os.system(cmd)
     print "VmDelete:%s" %vmname
