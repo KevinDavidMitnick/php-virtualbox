@@ -11,8 +11,8 @@ from threading import Thread, Event
 import datetime
 
 #定义进程运行文件,以及日志文件
-runfile = "/var/run/receive.pid"
-logfile = "/var/log/receive.log"
+runfile = "/var/run/vboxagent.pid"
+logfile = "/var/log/vboxagent.log"
 
 connection = None
 channel = None
