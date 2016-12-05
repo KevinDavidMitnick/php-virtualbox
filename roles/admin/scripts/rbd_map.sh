@@ -1,7 +1,7 @@
 #!/bin/sh
 rbd info cache/vbox &> /dev/null 
 if [ ! $? -eq 0 ];then
-	rbd create --size 30G cache/vbox --image-feature layering &> /dev/null
+	rbd create --size 2048G cache/vbox --image-feature layering &> /dev/null
 	rbd map cache/vbox &> /dev/null
 	mkfs.xfs -q /dev/rbd0 &> /dev/null
 	mount -t xfs -o "rw,noexec,nodev,noatime,nodiratime,nobarrier,inode64,logbufs=8,logbsize=256k,allocsize=4M" /dev/rbd0 /home/vbox  &>/dev/null
