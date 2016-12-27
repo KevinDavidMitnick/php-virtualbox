@@ -1,0 +1,179 @@
+[ 2016-12-02T16:48:35+08:00 ] 172.16.0.1 /taconsole/index.php?s=/Home/User/login.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000074s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000141s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.009350s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009746s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000158s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000207s ]
+INFO: 
+INFO: 
+INFO: 
+
+[ 2016-12-02T16:48:35+08:00 ] 172.16.0.1 /taconsole/index.php?s=/Home/User/login.html
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000067s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000124s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.007895s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008222s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000126s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000169s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000423s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000479s ]
+
+[ 2016-12-02T16:48:45+08:00 ] 172.16.0.1 /taconsole/index.php?s=/Home/User/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000529s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000929s ]
+SQL: SHOW COLUMNS FROM `onethink_config` [ RunTime:0.001067s ]
+SQL: SELECT `type`,`name`,`value` FROM `onethink_config` WHERE ( `status` = 1 )  [ RunTime:0.000301s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.001166s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `username` = 'admin' ) LIMIT 1   [ RunTime:0.000243s ]
+SQL: UPDATE `onethink_ucenter_member` SET `last_login_time`=1480668525,`last_login_ip`='2886729729' WHERE ( `id` = 1 ) [ RunTime:0.000330s ]
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.001046s ]
+SQL: SELECT `uid`,`nickname`,`truename`,`sex`,`birthday`,`qq`,`score`,`login`,`reg_ip`,`reg_time`,`last_login_ip`,`last_login_time`,`status` FROM `onethink_member` WHERE ( `uid` = 1 ) LIMIT 1   [ RunTime:0.000270s ]
+SQL: UPDATE `onethink_member` SET `login`=`login`+1,`last_login_time`=1480668525,`last_login_ip`='2886729729' WHERE ( `uid` = 1 ) [ RunTime:0.000246s ]
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.000828s ]
+SQL: SELECT `id`,`username`,`email`,`mobile`,`status` FROM `onethink_ucenter_member` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000265s ]
+SQL: SHOW COLUMNS FROM `onethink_action` [ RunTime:0.000983s ]
+SQL: SELECT * FROM `onethink_action` WHERE ( `name` = 'user_login' ) LIMIT 1   [ RunTime:0.000269s ]
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.000735s ]
+SQL: SELECT `nickname` FROM `onethink_member` WHERE ( `uid` = 1 ) LIMIT 1   [ RunTime:0.000228s ]
+SQL: SHOW COLUMNS FROM `onethink_action_log` [ RunTime:0.000915s ]
+SQL: INSERT INTO `onethink_action_log` (`action_id`,`user_id`,`action_ip`,`model`,`record_id`,`create_time`,`remark`) VALUES (1,1,2886729729,'member',1,1480668525,'admin在2016-12-02 16:48登录了后台') [ RunTime:0.000333s ]
+SQL: SELECT * FROM `onethink_action` WHERE ( `name` = 'user_login' ) LIMIT 1   [ RunTime:0.000188s ]
+NOTIC: [8] Undefined offset: 1 /var/www/html/taconsole/Application/Common/Common/function.php 第 689 行.
+NOTIC: [2] array_key_exists() expects parameter 2 to be array, null given /var/www/html/taconsole/Application/Common/Common/function.php 第 689 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `onethink_action_log` WHERE ( `action_id` = 1 ) AND ( `user_id` = 1 ) AND ( `create_time` > 1480582125 ) LIMIT 1   [ RunTime:0.001202s ]
+SQL: UPDATE `onethink_member` SET `score`=score+10 WHERE ( uid=1 AND status>-1 ) [ RunTime:0.000208s ]
+
+[ 2016-12-02T16:48:45+08:00 ] 172.16.0.1 /taconsole/index.php?s=/Home/Index/index.html
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.000830s ]
+SQL: SHOW COLUMNS FROM `onethink_vminfo` [ RunTime:0.000897s ]
+SQL: SELECT * FROM `onethink_vminfo` WHERE ( uid=1 ) ORDER BY vmname DESC  [ RunTime:0.000176s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000082s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000146s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.011320s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011384s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000142s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000188s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000433s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000488s ]
+
+[ 2016-12-02T16:48:47+08:00 ] 172.16.0.1 /taconsole/index.php?s=/Home/Index/manage.html
+SQL: SHOW COLUMNS FROM `onethink_ucenter_member` [ RunTime:0.000858s ]
+SQL: SELECT * FROM `onethink_ucenter_member` WHERE ( `id` <> 1 )  [ RunTime:0.000269s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000127s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000224s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.013825s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013917s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000188s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000249s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000641s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000721s ]
+
+[ 2016-12-02T16:48:49+08:00 ] 172.16.0.1 /taconsole/index.php?s=/Home/Index/index.html
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.000773s ]
+SQL: SHOW COLUMNS FROM `onethink_vminfo` [ RunTime:0.000712s ]
+SQL: SELECT * FROM `onethink_vminfo` WHERE ( uid=1 ) ORDER BY vmname DESC  [ RunTime:0.000243s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000124s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000206s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.014570s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014651s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000172s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000233s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000605s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000686s ]
+
+[ 2016-12-02T16:48:50+08:00 ] 172.16.0.1 /taconsole/index.php?s=/home/index/vm_create
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000499s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000897s ]
+SQL: SHOW COLUMNS FROM `onethink_config` [ RunTime:0.000965s ]
+SQL: SELECT `type`,`name`,`value` FROM `onethink_config` WHERE ( `status` = 1 )  [ RunTime:0.000251s ]
+SQL: SHOW COLUMNS FROM `onethink_vminfo` [ RunTime:0.000683s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `onethink_vminfo` WHERE ( `uid` = 1 ) LIMIT 1   [ RunTime:0.000176s ]
+SQL: SELECT `vmname` FROM `onethink_vminfo` ORDER BY vmname DESC LIMIT 1   [ RunTime:0.000150s ]
+SQL: SELECT `port` FROM `onethink_vminfo` ORDER BY port DESC LIMIT 1   [ RunTime:0.000113s ]
+SQL: SHOW COLUMNS FROM `onethink_vminfo` [ RunTime:0.000856s ]
+SQL: INSERT INTO `onethink_vminfo` (`uid`,`vmname`,`ip`,`port`,`vmid`) VALUES (1,1,'172.16.6.12',6001,'shutdown') [ RunTime:0.000290s ]
+
+[ 2016-12-02T16:48:52+08:00 ] 172.16.0.1 /taconsole/index.php
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.000764s ]
+SQL: SHOW COLUMNS FROM `onethink_vminfo` [ RunTime:0.000708s ]
+SQL: SELECT * FROM `onethink_vminfo` WHERE ( uid=1 ) ORDER BY vmname DESC  [ RunTime:0.000282s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000108s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000188s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.014509s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014589s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000171s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000230s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000584s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000656s ]
+
+[ 2016-12-02T16:48:53+08:00 ] 172.16.0.1 /taconsole/index.php?s=/home/index/vm_start
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000508s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000921s ]
+SQL: SHOW COLUMNS FROM `onethink_config` [ RunTime:0.000765s ]
+SQL: SELECT `type`,`name`,`value` FROM `onethink_config` WHERE ( `status` = 1 )  [ RunTime:0.000318s ]
+SQL: SHOW COLUMNS FROM `onethink_vminfo` [ RunTime:0.000853s ]
+SQL: SELECT `port` FROM `onethink_vminfo` WHERE ( `vmname` = 1 ) LIMIT 1   [ RunTime:0.000217s ]
+SQL: SHOW COLUMNS FROM `onethink_vminfo` [ RunTime:0.000817s ]
+SQL: UPDATE `onethink_vminfo` SET `vmid`='running' WHERE ( vmname=1 ) [ RunTime:0.000251s ]
+
+[ 2016-12-02T16:48:54+08:00 ] 172.16.0.1 /taconsole/index.php
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.000835s ]
+SQL: SHOW COLUMNS FROM `onethink_vminfo` [ RunTime:0.000726s ]
+SQL: SELECT * FROM `onethink_vminfo` WHERE ( uid=1 ) ORDER BY vmname DESC  [ RunTime:0.000275s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000112s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000192s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.014371s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014448s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000165s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000222s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000571s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000639s ]
+
+[ 2016-12-02T16:48:57+08:00 ] 172.16.0.1 /taconsole/index.php?s=/Home/index/index.html&ip=172.16.6.12&port=6001&
+SQL: SHOW COLUMNS FROM `onethink_member` [ RunTime:0.000750s ]
+SQL: SHOW COLUMNS FROM `onethink_vminfo` [ RunTime:0.000746s ]
+SQL: SELECT * FROM `onethink_vminfo` WHERE ( uid=1 ) ORDER BY vmname DESC  [ RunTime:0.000241s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000087s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000154s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.012088s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012154s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000128s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000173s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000458s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000512s ]
+

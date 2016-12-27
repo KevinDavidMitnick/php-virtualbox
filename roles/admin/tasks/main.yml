@@ -18,8 +18,8 @@
 - name: modify vbox passwd as vbox
   shell: echo vbox | passwd vbox --stdin
 
-- name: ceph rbd map 
-  script:  ./roles/admin/scripts/rbd_map.sh
+#- name: ceph rbd map 
+#  script:  ./roles/admin/scripts/rbd_map.sh
 
 - name: modify /home/vbox owner
   file: path='/home/vbox' state=directory mode=0755 owner=vbox group=vboxusers 

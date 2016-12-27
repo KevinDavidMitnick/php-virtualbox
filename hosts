@@ -1,9 +1,9 @@
 [admin]
-NodeB
+NodeC
 
 [webservers]
-NodeB
+NodeC
 
 [dbservers]
-NodeB
+NodeC
 

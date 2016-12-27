@@ -38,7 +38,7 @@ case "$1" in
   start)
     echo "Starting receive daemon"
     systemctl restart rabbitmq-server
-    rbd_map
+    #rbd_map
     $PYTHONBIN /etc/init.d/receive.py start
     RETVAL=$?
     ;;
